@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArduinoLED", "ArduinoLED\ArduinoLED.vcxproj", "{4FC3608F-FB37-465A-9568-49E215D455DD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{18836993-536D-470D-B4EF-808C33E3D852} = {18836993-536D-470D-B4EF-808C33E3D852}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArduinoControl", "ArduinoControl\ArduinoControl.vcxproj", "{18836993-536D-470D-B4EF-808C33E3D852}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Debug|x64.ActiveCfg = Debug|x64
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Debug|x64.Build.0 = Debug|x64
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Debug|x86.ActiveCfg = Debug|Win32
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Debug|x86.Build.0 = Debug|Win32
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Release|x64.ActiveCfg = Release|x64
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Release|x64.Build.0 = Release|x64
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Release|x86.ActiveCfg = Release|Win32
+		{4FC3608F-FB37-465A-9568-49E215D455DD}.Release|x86.Build.0 = Release|Win32
+		{18836993-536D-470D-B4EF-808C33E3D852}.Debug|x64.ActiveCfg = Debug|x64
+		{18836993-536D-470D-B4EF-808C33E3D852}.Debug|x64.Build.0 = Debug|x64
+		{18836993-536D-470D-B4EF-808C33E3D852}.Debug|x86.ActiveCfg = Debug|Win32
+		{18836993-536D-470D-B4EF-808C33E3D852}.Debug|x86.Build.0 = Debug|Win32
+		{18836993-536D-470D-B4EF-808C33E3D852}.Release|x64.ActiveCfg = Release|x64
+		{18836993-536D-470D-B4EF-808C33E3D852}.Release|x64.Build.0 = Release|x64
+		{18836993-536D-470D-B4EF-808C33E3D852}.Release|x86.ActiveCfg = Release|Win32
+		{18836993-536D-470D-B4EF-808C33E3D852}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E80E0B25-D2FC-46CF-B14F-5C460B687181}
+	EndGlobalSection
+EndGlobal

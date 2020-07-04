@@ -1,0 +1,4 @@
+﻿  ArduinoLED.cpp
+C:\Users\timot\code\ArduinoLED\ArduinoLED\ArduinoLED.cpp(164,9): warning C4101: 'dcb': unreferenced local variable
+C:\Users\timot\code\ArduinoLED\ArduinoLED\ArduinoLED.cpp(163,12): warning C4101: 'commFile': unreferenced local variable
+  ArduinoLED.vcxproj -> C:\Users\timot\code\ArduinoLED\x64\Debug\ArduinoLED.exe
