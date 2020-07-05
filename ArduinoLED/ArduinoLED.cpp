@@ -76,37 +76,24 @@ const std::array<hvk::Color, 8 * 5> kTestGrey =
     {8, 6, 25},{8, 6, 25},{8, 6, 25},{8, 6, 25},{8, 6, 25},{8, 6, 25},{8, 6, 25},{8, 6, 25}
 } };
 
-void getInput(HANDLE commHandle)
+const hvk::Color Red = { 255, 0, 0 };
+const hvk::Color Orange = { 255, 128, 0 };
+const hvk::Color Yellow = { 255, 255, 0 };
+const hvk::Color Lime = { 128, 255, 0 };
+const hvk::Color Green = { 0, 255, 0 };
+const hvk::Color Sea = { 0, 255, 128 };
+const hvk::Color Cyan = { 0, 255, 255 };
+const hvk::Color Teal = { 0, 128, 255 };
+const hvk::Color Blue = { 0, 0, 255 };
+const hvk::Color Violet = { 128, 0, 255 };
+const hvk::Color Purple = { 255, 0, 255 };
+const hvk::Color Pink = { 255, 0, 128 };
+
+std::array<hvk::Color, 8 * 5> makeColor(const hvk::Color& c)
 {
-    char readBuffer[256];
-    memset(readBuffer, '\0', 256);
-
-    DWORD bytesRead;
-    while (gRunning)
-    {
-		//OVERLAPPED comRead = { 0 };
-  //      comRead.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-  //      bool readSuccess = ReadFile(commHandle, readBuffer, 256, &bytesRead, &comRead);
-  //      //bool readSuccess = ReadFileEx(commHandle, readBuffer, 256, &comRead, [](DWORD dwErrorCode, DWORD dwNumberOfBytes, LPOVERLAPPED lpOverlapped) {
-  //      //});
-  //      assert(readSuccess);
-
-        DWORD errors;
-        COMSTAT stat;
-        ClearCommError(commHandle, &errors, &stat);
-        if (stat.cbInQue > 0)
-        {
-			OVERLAPPED comRead = { 0 };
-			comRead.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-			bool readSuccess = ReadFile(commHandle, readBuffer, stat.cbInQue, &bytesRead, &comRead);
-            if (readSuccess)
-            {
-                std::cout << readBuffer << std::endl;
-                memset(readBuffer, '\0', stat.cbInQue);
-            }
-        }
-        Sleep(16);
-    }
+    std::array<hvk::Color, 8 * 5> filled;
+    filled.fill(c);
+    return filled;
 }
 
 int main()
@@ -118,179 +105,28 @@ int main()
     hvk::control::ArduinoController<8, 5> controller;
     controller.Init();
 
-    //std::thread readThread(getInput, commFile);
-
+    controller.WritePixels(makeColor(Red));
     Sleep(1000);
-
-    controller.WritePixels(kColors);
-
+    controller.WritePixels(makeColor(Orange));
     Sleep(1000);
-
-    std::array<hvk::Color, 8*5> blankColors;
-    for (int i = 0; i < blankColors.size(); ++i)
-    {
-        blankColors[i] = { 0, 0, 0 };
-    }
-
-    controller.WritePixels(blankColors);
-
+    controller.WritePixels(makeColor(Yellow));
     Sleep(1000);
-
-    controller.WritePixels(kWhites);
-
+    controller.WritePixels(makeColor(Lime));
     Sleep(1000);
-
-    controller.WritePixels(blankColors);
-
+    controller.WritePixels(makeColor(Green));
     Sleep(1000);
-
-    controller.WritePixels(kOrange);
-
+    controller.WritePixels(makeColor(Sea));
     Sleep(1000);
-
-    controller.WritePixels(kGrey);
-
+    controller.WritePixels(makeColor(Cyan));
     Sleep(1000);
-
-    controller.WritePixels(kDarkGrey);
-
+    controller.WritePixels(makeColor(Teal));
     Sleep(1000);
-
-    controller.WritePixels(kTestGrey);
-
+    controller.WritePixels(makeColor(Blue));
     Sleep(1000);
-
-    HANDLE commFile;
-    DCB dcb;
-
-    //commFile = CreateFileA(
-    //    "COM4",
-    //    GENERIC_READ | GENERIC_WRITE,
-    //    NULL,
-    //    NULL,
-    //    OPEN_EXISTING,
-    //    NULL,
-    //    NULL);
-    //if (commFile == INVALID_HANDLE_VALUE)
-    //{
-    //    std::cerr << "Failed to open COMM port" << std::endl;
-    //    return -1;
-    //}
-
-    //memset(&dcb, 0, sizeof(DCB));
-    //bool success = GetCommState(commFile, &dcb);
-    //assert(success);
-    //if (!success)
-    //{
-    //    std::cerr << "Failed to get initial COMM State" << std::endl;
-    //    return -2;
-    //}
-
-    //dcb.BaudRate = CBR_9600;
-    //dcb.ByteSize = 8;
-    //dcb.Parity = NOPARITY;
-    //dcb.StopBits = ONESTOPBIT;
-
-    //success = SetCommState(commFile, &dcb);
-    //assert(success);
-    //if (!success)
-    //{
-    //    std::cerr << "Failed to set COMM State" << std::endl;
-    //    return -3;
-    //}
-
-    //success = GetCommState(commFile, &dcb);
-    //assert(success);
-    //if (!success)
-    //{
-    //    std::cerr << "Failed to get updated COMM State" << std::endl;
-    //    return -4;
-    //}
-
-    //std::cout << "Successfully configured device on COMM port" << std::endl;
-
-    //gRunning = true;
-
-    //// begin serial input thread
-    //std::thread readThread(getInput, commFile);
-
-    //while (gRunning)
-    //{
-    //    int userChoice = 0;
-    //    std::cout << "Choose an action\n\t1: Set LED color\n\t2: Exit\n..." << std::endl;
-    //    std::cin >> userChoice;
-    //    switch (userChoice)
-    //    {
-    //    case 1:
-    //    {
-    //        char colorChoice;
-    //        std::cout << "Choose color:\n\tR\n\tG\n\tB" << std::endl;
-    //        std::cin >> colorChoice;
-    //        Color newColor = { 1, 1, 1 };
-    //        switch (colorChoice)
-    //        {
-    //        case 'R':
-    //            newColor.r = 255;
-    //            break;
-    //        case 'G':
-    //            newColor.g = 255;
-    //            break;
-    //        case'B':
-    //            newColor.b = 255;
-    //            break;
-    //        default:
-    //            newColor.r = 255;
-    //            break;
-    //        }
-    //        OVERLAPPED oWrite;
-    //        oWrite.hEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
-    //        DWORD bytesWritten;
-    //        //char output[7] = { 'R', newColor.r, 'G', newColor.g, 'B', newColor.b, '>' };
-    //        char output[121];
-    //        memset(output, 0, 120);
-    //        for (size_t i = 0; i < 120; i += 3)
-    //        {
-    //            output[i] = newColor.r;
-    //            output[i + 1] = newColor.g;
-    //            output[i + 2] = newColor.b;
-    //        }
-    //        output[120] = '>';
-    //        //char output[] = { 100, 1, 1, 100, 1, 1, '>' };
-    //        bool success = WriteFile(commFile, output, sizeof(output), &bytesWritten, NULL);
-    //        break;
-    //    }
-    //    case 2:
-    //        gRunning = false;
-    //        break;
-    //    default:
-    //        std::cout << "Invalid option\n" << std::endl;
-    //    }
-    //}
-
-    //// rejoin input thread
-    //readThread.join();
-
-    //bool closeSuccess = CloseHandle(commFile);
-    //assert(closeSuccess);
-    //if (!closeSuccess)
-    //{
-    //    std::cerr << "Error when closing COMM port" << std::endl;
-    //}
-
- //   DWORD bytesWritten;
-	//char output[7] = { 'R', 0, 'G', 255, 'B', 0, '>' };
- //   bool success = WriteFile(commFile, output, sizeof(output), &bytesWritten, NULL);
- //   if (!success)
- //   {
- //       return -2;
- //   }
-
- //   DWORD bytesRead;
- //   char readBuffer[64];
- //   memset(readBuffer, 0, 64);
- //   success = ReadFile(commFile, readBuffer, 64, &bytesRead, NULL);
- //   if (!success)
- //   {
- //       return -3;
- //   }
+    controller.WritePixels(makeColor(Violet));
+    Sleep(1000);
+    controller.WritePixels(makeColor(Purple));
+    Sleep(1000);
+    controller.WritePixels(makeColor(Pink));
+    Sleep(1000);
 }
