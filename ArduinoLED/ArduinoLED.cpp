@@ -38,17 +38,20 @@ const hvk::Color Violet = { 128, 0, 255 };
 const hvk::Color Purple = { 255, 0, 255 };
 const hvk::Color Pink = { 255, 0, 128 };
 
-std::array<hvk::Color, 8 * 5> makeSingleLedTest()
+#define DIM 8, 5
+#define DIMS 34 * 2
+
+std::array<hvk::Color, DIMS> makeSingleLedTest()
 {
-    std::array<hvk::Color, 8 * 5> filled;
+    std::array<hvk::Color, DIMS> filled;
     filled.fill({ 0, 0, 0 });
     filled[0] = { 50, 0, 0 };
     return filled;
 }
 
-std::array<hvk::Color, 8 * 5> makeColor(const hvk::Color& c)
+std::array<hvk::Color, DIMS> makeColor(const hvk::Color& c)
 {
-    std::array<hvk::Color, 8 * 5> filled;
+    std::array<hvk::Color, DIMS> filled;
     filled.fill(c);
     return filled;
 }
@@ -60,10 +63,10 @@ int main()
     char streamBuffer[kStreamBufferSize];
     memset(streamBuffer, 0, kStreamBufferSize);
 
-    hvk::control::ArduinoController<8, 5> controller;
+    hvk::control::ArduinoController<34, 2> controller;
     controller.Init();
 
-    Sleep(1000);
+    Sleep(2000);
     controller.WritePixels(makeColor(Grey));
     Sleep(sleepTime);
     controller.WritePixels(makeColor(GreyRed));
@@ -91,4 +94,5 @@ int main()
     controller.WritePixels(makeColor(Purple));
     Sleep(sleepTime);
     controller.WritePixels(makeColor(Pink));
+    Sleep(sleepTime);
 }
