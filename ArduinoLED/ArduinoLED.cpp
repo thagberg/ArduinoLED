@@ -49,10 +49,11 @@ std::array<hvk::Color, DIMS> makeSingleLedTest()
     return filled;
 }
 
-std::array<hvk::Color, DIMS> makeColor(const hvk::Color& c)
+std::vector<hvk::Color> makeColor(const hvk::Color& c)
 {
-    std::array<hvk::Color, DIMS> filled;
-    filled.fill(c);
+    std::vector<hvk::Color> filled;
+    filled.resize(68);
+    std::fill(filled.begin(), filled.end(), c);
     return filled;
 }
 
@@ -63,7 +64,7 @@ int main()
     char streamBuffer[kStreamBufferSize];
     memset(streamBuffer, 0, kStreamBufferSize);
 
-    hvk::control::ArduinoController<34, 2> controller;
+    hvk::control::ArduinoController controller(34 * 2);
     controller.Init();
 
     Sleep(2000);
