@@ -35,6 +35,14 @@ namespace hvk
 
 		ArduinoController::~ArduinoController()
 		{
+			if (mDeviceReady)
+			{
+				Stop();
+			}
+		}
+
+		bool ArduinoController::Stop()
+		{
 			mDeviceReady = false;
 			mDeviceConnected = false;
 
@@ -43,6 +51,8 @@ namespace hvk
 			mIOThread.join();
 			success = CloseHandle(mCommHandle);
 			assert(success);
+
+			return success;
 		}
 
 		int8_t ArduinoController::Init()
